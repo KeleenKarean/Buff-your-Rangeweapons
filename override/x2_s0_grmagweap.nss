@@ -83,20 +83,6 @@ void main()
         }
         return;
     }
-        else
-    {
-        if(IPGetIsRangedWeapon(oMySpellTarget) )
-        {
-            SignalEvent(GetItemPossessor(oMySpellTarget), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
-
-            if (nDuration>0)
-            {
-                ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oMySpellTarget));
-                ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oMySpellTarget), HoursToSeconds(nDuration));
-                AddGreaterEnhancementEffectToWeapon(oMySpellTarget, (HoursToSeconds(nDuration)), nCasterLvl);
-        }
-            return;
-        }
             else
             {
             if(IPGetIsRangedWeapon(oRangeWeapon) )
@@ -107,7 +93,7 @@ void main()
                 {
                     ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oRangeWeapon));
                     ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oRangeWeapon), HoursToSeconds(nDuration));
-                    AddGreaterEnhancementEffectToWeapon(oMySpellTarget, (HoursToSeconds(nDuration)), nCasterLvl);
+                    AddGreaterEnhancementEffectToWeapon(oRangeWeapon, (HoursToSeconds(nDuration)), nCasterLvl);
             }
                 return;
             }
@@ -117,7 +103,5 @@ void main()
                return;
     }
     }
-    }
-
 
 }

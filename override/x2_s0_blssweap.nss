@@ -88,12 +88,12 @@ void main()
 //old          }
 //old      }
 
-   object oMyWeapon   =  IPGetTargetedOrEquippedMeleeWeapon();
-    object oMySpellTarget   =  GetSpellTargetObject();
-    object oRangeWeapon = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oMySpellTarget);
+    object oMyWeapon   =  IPGetTargetedOrEquippedMeleeWeapon();
+//    object oMySpellTarget   =  GetSpellTargetObject();
+    object oRangeWeapon = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oTarget);
 
-   if(GetIsObjectValid(oMyWeapon) )
-   {
+    if(GetIsObjectValid(oMyWeapon) )
+    {
         SignalEvent(GetItemPossessor(oMyWeapon), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
 
         if (nDuration>0)
@@ -105,20 +105,6 @@ void main()
         return;
     }
         else
-    {
-        if(IPGetIsRangedWeapon(oMySpellTarget) )
-        {
-            SignalEvent(GetItemPossessor(oMySpellTarget), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
-
-            if (nDuration>0)
-            {
-                ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oMySpellTarget));
-                ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oMySpellTarget), TurnsToSeconds(nDuration));
-                AddBlessEffectToWeapon(oMySpellTarget, TurnsToSeconds(nDuration));
-        }
-            return;
-        }
-            else
             {
             if(IPGetIsRangedWeapon(oRangeWeapon) )
             {
@@ -126,9 +112,9 @@ void main()
 
                 if (nDuration>0)
                 {
-                ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oMySpellTarget));
-                ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oMySpellTarget), TurnsToSeconds(nDuration));
-                AddBlessEffectToWeapon(oMySpellTarget, TurnsToSeconds(nDuration));
+                ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oRangeWeapon));
+                ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oRangeWeapon), TurnsToSeconds(nDuration));
+                AddBlessEffectToWeapon(oRangeWeapon, TurnsToSeconds(nDuration));
             }
                 return;
             }
@@ -139,6 +125,3 @@ void main()
     }
     }
     }
-
-
-}

@@ -69,6 +69,10 @@ void main()
      object oMyWeapon   =  IPGetTargetedOrEquippedMeleeWeapon();
      object oMySpellTarget   =  GetSpellTargetObject();
      object oRangeWeapon = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oMySpellTarget);
+     object oGet04 = GetItemInSlot(INVENTORY_SLOT_ARROWS, oMySpellTarget);
+     object oGet02 = GetItemInSlot(INVENTORY_SLOT_BOLTS, oMySpellTarget);
+     object oGet03 = GetItemInSlot(INVENTORY_SLOT_BULLETS, oMySpellTarget);
+     object oGet01 = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oMySpellTarget);
 
    if(GetIsObjectValid(oMyWeapon) )
    {
@@ -84,31 +88,26 @@ void main()
          }
             return;
     }
-        else
-    {
-        if(IPGetIsRangedWeapon(oMySpellTarget) )
-        {
-            SignalEvent(GetItemPossessor(oMySpellTarget), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
-
-            if (nDuration>0)
-            {
-                ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oMySpellTarget));
-                ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oMySpellTarget), TurnsToSeconds(nDuration));
-                AddFlamingEffectToWeapon(oMySpellTarget, TurnsToSeconds(nDuration),nCasterLvl);
-        }
-            return;
-        }
             else
             {
             if(IPGetIsRangedWeapon(oRangeWeapon) )
             {
-                SignalEvent(GetItemPossessor(oRangeWeapon), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
+                SignalEvent(GetItemPossessor(oGet01), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
+                SignalEvent(GetItemPossessor(oGet02), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
+                SignalEvent(GetItemPossessor(oGet03), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
+                SignalEvent(GetItemPossessor(oGet04), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
 
                 if (nDuration>0)
                 {
-                ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oMySpellTarget));
-                ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oMySpellTarget), TurnsToSeconds(nDuration));
-                AddFlamingEffectToWeapon(oMySpellTarget, TurnsToSeconds(nDuration),nCasterLvl);
+                    ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oGet01));
+                    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oGet01), TurnsToSeconds(nDuration));
+                    AddFlamingEffectToWeapon(oGet01, (TurnsToSeconds(nDuration)), nCasterLvl);
+                    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oGet02), TurnsToSeconds(nDuration));
+                    AddFlamingEffectToWeapon(oGet02, (TurnsToSeconds(nDuration)), nCasterLvl);
+                    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oGet03), TurnsToSeconds(nDuration));
+                    AddFlamingEffectToWeapon(oGet03, (TurnsToSeconds(nDuration)), nCasterLvl);
+                    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oGet04), TurnsToSeconds(nDuration));
+                    AddFlamingEffectToWeapon(oGet04, (TurnsToSeconds(nDuration)), nCasterLvl);
             }
                 return;
             }
@@ -117,6 +116,4 @@ void main()
                FloatingTextStrRefOnCreature(83384, OBJECT_SELF);
                return;
     }
-    }
-    }
-}
+}}

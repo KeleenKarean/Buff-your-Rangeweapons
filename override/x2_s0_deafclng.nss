@@ -84,20 +84,6 @@ void main()
         return;
     }
         else
-    {
-        if(IPGetIsRangedWeapon(oMySpellTarget) )
-        {
-            SignalEvent(GetItemPossessor(oMySpellTarget), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
-
-            if (nDuration>0)
-            {
-                ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oMySpellTarget));
-                ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oMySpellTarget), HoursToSeconds(nDuration));
-                AddDeafeningClangEffectToWeapon(oMySpellTarget, RoundsToSeconds(nDuration));
-        }
-            return;
-        }
-            else
             {
             if(IPGetIsRangedWeapon(oRangeWeapon) )
             {
@@ -117,7 +103,5 @@ void main()
                return;
     }
     }
-    }
-
 
 }

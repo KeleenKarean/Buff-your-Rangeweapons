@@ -74,20 +74,6 @@ object oRangeWeapon = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oMySpellTarget);
     }
         return;
     }
-        else
-    {
-        if(IPGetIsRangedWeapon(oMySpellTarget) )
-        {
-            SignalEvent(GetItemPossessor(oMySpellTarget), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
-
-            if (nDuration>0)
-            {
-                ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oMySpellTarget));
-                ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oMySpellTarget), HoursToSeconds(nDuration));
-                AddEnhancementEffectToWeapon(oMySpellTarget, HoursToSeconds(nDuration));
-        }
-            return;
-        }
             else
             {
             if(IPGetIsRangedWeapon(oRangeWeapon) )
@@ -108,7 +94,4 @@ object oRangeWeapon = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oMySpellTarget);
                return;
     }
     }
-    }
-
-
 }

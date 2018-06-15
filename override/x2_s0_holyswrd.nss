@@ -21,7 +21,7 @@
 
 void  AddHolyAvengerEffectToWeapon(object oMyWeapon, float fDuration)
 {
-   //IPSafeAddItemProperty(oMyWeapon,ItemPropertyEnhancementBonus(2), fDuration, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING ,FALSE,TRUE);
+   IPSafeAddItemProperty(oMyWeapon,ItemPropertyEnhancementBonus(5), fDuration, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING ,FALSE,FALSE);
    IPSafeAddItemProperty(oMyWeapon,ItemPropertyHolyAvenger(), fDuration, X2_IP_ADDPROP_POLICY_KEEP_EXISTING,TRUE,TRUE);
    return;
 }
@@ -62,6 +62,10 @@ void main()
     object oMyWeapon   =  IPGetTargetedOrEquippedMeleeWeapon();
     object oMySpellTarget   =  GetSpellTargetObject();
     object oRangeWeapon = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oMySpellTarget);
+    object oGet04 = GetItemInSlot(INVENTORY_SLOT_ARROWS, oMySpellTarget);
+    object oGet02 = GetItemInSlot(INVENTORY_SLOT_BOLTS, oMySpellTarget);
+    object oGet03 = GetItemInSlot(INVENTORY_SLOT_BULLETS, oMySpellTarget);
+    object oGet01 = GetItemInSlot(INVENTORY_SLOT_RIGHTHAND, oMySpellTarget);
 
 
     if(GetIsObjectValid(oMyWeapon) )
@@ -80,31 +84,26 @@ void main()
 
         return;
     }
-        else
-    {
-        if(IPGetIsRangedWeapon(oMySpellTarget) )
-        {
-            SignalEvent(GetItemPossessor(oMySpellTarget), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
-
-            if (nDuration>0)
-            {
-                ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oMySpellTarget));
-                ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oMySpellTarget), HoursToSeconds(nDuration));
-                AddHolyAvengerEffectToWeapon(oMySpellTarget, RoundsToSeconds(nDuration));
-        }
-            return;
-        }
             else
             {
             if(IPGetIsRangedWeapon(oRangeWeapon) )
             {
-                SignalEvent(GetItemPossessor(oRangeWeapon), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
+                SignalEvent(GetItemPossessor(oGet01), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
+                SignalEvent(GetItemPossessor(oGet02), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
+                SignalEvent(GetItemPossessor(oGet03), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
+                SignalEvent(GetItemPossessor(oGet04), EventSpellCastAt(OBJECT_SELF, GetSpellId(), FALSE));
 
                 if (nDuration>0)
                 {
                     ApplyEffectToObject(DURATION_TYPE_INSTANT, eVis, GetItemPossessor(oRangeWeapon));
-                    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oRangeWeapon), HoursToSeconds(nDuration));
-                    AddHolyAvengerEffectToWeapon(oRangeWeapon, RoundsToSeconds(nDuration));
+                    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oGet01), RoundsToSeconds(nDuration));
+                    AddHolyAvengerEffectToWeapon(oGet01, RoundsToSeconds(nDuration));
+                    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oGet02), RoundsToSeconds(nDuration));
+                    AddHolyAvengerEffectToWeapon(oGet02, RoundsToSeconds(nDuration));
+                    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oGet03), RoundsToSeconds(nDuration));
+                    AddHolyAvengerEffectToWeapon(oGet03, RoundsToSeconds(nDuration));
+                    ApplyEffectToObject(DURATION_TYPE_TEMPORARY, eDur, GetItemPossessor(oGet04), RoundsToSeconds(nDuration));
+                    AddHolyAvengerEffectToWeapon(oGet04, RoundsToSeconds(nDuration));
             }
                 return;
             }
@@ -114,7 +113,5 @@ void main()
                return;
     }
     }
-    }
-
 
 }
