@@ -21,7 +21,7 @@
 
 void  AddHolyAvengerEffectToWeapon(object oMyWeapon, float fDuration)
 {
-   IPSafeAddItemProperty(oMyWeapon,ItemPropertyEnhancementBonus(5), fDuration, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING ,FALSE,FALSE);
+//   IPSafeAddItemProperty(oMyWeapon,ItemPropertyAttackBonus(5), fDuration, X2_IP_ADDPROP_POLICY_REPLACE_EXISTING ,FALSE,FALSE);
    IPSafeAddItemProperty(oMyWeapon,ItemPropertyHolyAvenger(), fDuration, X2_IP_ADDPROP_POLICY_KEEP_EXISTING,TRUE,TRUE);
    return;
 }
